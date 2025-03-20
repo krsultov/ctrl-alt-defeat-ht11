@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@middleware/*": [
+        "./src/middleware/*"
+      ],
+      "@routes/*": [
+        "./src/routes/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@interfaces/*": [
+        "./src/types/*"
+      ],
+      "@entities/*": [
+        "./src/entities/*"
+      ]
+    }
+  },
+  "exclude": [
+    "**/*.test.ts"
+  ]
+}
