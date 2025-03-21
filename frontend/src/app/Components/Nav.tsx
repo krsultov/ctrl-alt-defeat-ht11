@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
 
     useEffect(() => {
-        setIsAuth(true)
+        setIsAuth(false)
     }, [])
 
     return (
@@ -37,10 +37,10 @@ const Nav: React.FC = () => {
                 </div>
             ) : (
                 <div className="flex gap-x-3">
-                    <Button variant="outlined" color="primary" component={Link} href="/Signup">
+                    <Button variant="outlined" color="primary" component={Link} href="/Login">
                         Login
                     </Button>
-                    <Button variant="contained" color="primary" component={Link} href="/Login">
+                    <Button variant="contained" color="primary" component={Link} href="/Signup">
                         Signup
                     </Button>
                 </div>
