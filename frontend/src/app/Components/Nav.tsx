@@ -38,10 +38,10 @@ const Nav: React.FC = () => {
             ) : (
                 <div className="flex gap-x-3">
                     <Button variant="outlined" color="primary" component={Link} href="/Signup">
-                        Signup
+                        Login
                     </Button>
                     <Button variant="contained" color="primary" component={Link} href="/Login">
-                        Login
+                        Signup
                     </Button>
                 </div>
             )}
