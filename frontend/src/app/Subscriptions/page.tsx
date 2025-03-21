@@ -20,7 +20,7 @@ const SubscriptionGrid: React.FC = () => {
             </div>
 
             <Filter />
-            <div className="max-h-screen flex">
+            <div className="max-h-screen flex items-center px-6 py-8">
                 <div className="w-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                         {subscriptions.map((sub, index) => (
@@ -39,7 +39,7 @@ const SubscriptionGrid: React.FC = () => {
                                 </Typography>
                                 <Button
                                     style={{
-                                        backgroundColor: "#8C080F",
+                                        backgroundColor: "#1B4965",
                                         color: "#ffffff"
                                     }}
                                 >
