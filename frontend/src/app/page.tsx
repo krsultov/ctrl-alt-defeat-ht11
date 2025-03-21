@@ -6,6 +6,8 @@ export default function Home() {
         <div className="text-3xl">Home Page</div>
         <Link href={"/Register"}>Register</Link>
         <Link href={"/Login"}>Login</Link>
+        <Link href={"/Transactions"}>Transactions</Link>
+        <Link href={"/Subscriptions"}>Subscriptions</Link>
 
     </div>
   );
