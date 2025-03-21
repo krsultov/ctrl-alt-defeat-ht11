@@ -82,7 +82,7 @@ export default function Transactions() {
     const paginatedTransactions = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     return (
-        <div className="w-full px-8 py-6">
+        <div>
             <Typography variant="h6" fontWeight="bold" gutterBottom>
                 Transactions
             </Typography>

@@ -44,7 +44,7 @@ const Analytics: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen min-w-screen flex justify-center items-center bg-gray-100 py-6 px-8">
+            <div className="min-h-screen min-w-screen flex justify-center items-center ">
                 <div className="flex justify-center items-center">
                     <Image src={loading} alt="Loading..." width={100} height={100} />
                 </div>
@@ -53,7 +53,7 @@ const Analytics: React.FC = () => {
     }
 
     return (
-        <div className="px-8 py-6 min-w-screen">
+        <div className="min-w-screen">
             <div className="flex justify-between items-center mb-8">
                 <Typography variant="h4" fontWeight={600}>
                     Banking Analytics
@@ -129,7 +129,7 @@ const Analytics: React.FC = () => {
                 <div className="bg-white p-6 shadow-lg">
                     <Typography variant="h6" className="text-gray-600 mb-4">
                         Revenue Breakdown (Bar Chart)
-                    </Typography>
+                    e</Typography>
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={barChartData}>
                             <CartesianGrid strokeDasharray="3 3" />
