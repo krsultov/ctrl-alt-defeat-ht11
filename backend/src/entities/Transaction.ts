@@ -1,32 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm"
-import { User } from "@entities/User"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne } from "typeorm"
+import { TransactionPayload } from "@entities/TransactionPayload"
 
 @Entity()
 export class Transaction {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @ManyToOne(() => User, (user) => user.transactionsSent)
-    sender!: User
+    @Column("varchar", { nullable: true })
+    senderDid!: string | null
 
-    @ManyToOne(() => User, (user) => user.transactionsReceived)
-    receiver!: User
+    @OneToOne(() => TransactionPayload, { onDelete: "CASCADE" })
+    payload!: TransactionPayload
 
-    @Column("decimal", { precision: 18, scale: 2 })
-    amount!: number
-
-    @Column("varchar")
-    type!: string
-
-    @Column("jsonb", { nullable: true })
-    metadata!: Record<string, any>
+    @Column("varchar", { nullable: true })
+    signature!: string | null
 
     @Column("varchar")
     status!: string
 
-    @Column("varchar")
-    signature!: string
-
     @CreateDateColumn()
     createdAt!: Date
+
+    @Column("timestamp", { nullable: true })
+    completedAt!: Date
 }
