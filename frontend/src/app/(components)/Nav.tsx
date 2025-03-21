@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
 
     useEffect(() => {
-        setIsAuth(false)
+        setIsAuth(true)
     }, [])
 
     return (
