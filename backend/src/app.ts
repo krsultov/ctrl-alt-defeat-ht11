@@ -14,4 +14,9 @@ app.get("/ping", (req, res) => {
 
 app.use("/", didRouter)
 
+app.post("/kyc/webhook", (req, res) => {
+    console.log(req.body)
+    return res.json({ message: "ok" })
+})
+
 export { app }
