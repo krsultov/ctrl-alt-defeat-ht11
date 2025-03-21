@@ -129,7 +129,7 @@ const Analytics: React.FC = () => {
                 <div className="bg-white p-6 shadow-lg">
                     <Typography variant="h6" className="text-gray-600 mb-4">
                         Revenue Breakdown (Bar Chart)
-                    e</Typography>
+                    </Typography>
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={barChartData}>
                             <CartesianGrid strokeDasharray="3 3" />

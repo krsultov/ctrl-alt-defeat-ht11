@@ -3,9 +3,13 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button, Typography } from "@mui/material"
+import { useScreenWidth } from "../(customhooks)/useScreenWidth"
+import TopDrawer from "./TopDrawer"
 
 const Nav: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
+    const screenWidth = useScreenWidth()
+
 
     useEffect(() => {
         setIsAuth(true)
@@ -21,20 +25,27 @@ const Nav: React.FC = () => {
             </Link>
 
             {isAuth ? (
-                <div className="flex items-center justify-evenly gap-x-5">
-                    <Button>
+                
+                screenWidth <= 600 ? (
+                    <div>
+                        <TopDrawer/>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between">
+                      <Button>
                         <Link href="/Transactions">Transactions</Link>
-                    </Button>
-                    <Button>
+                      </Button>
+                      <Button>
                         <Link href="/Subscriptions">Subscriptions</Link>
-                    </Button>
-                    <Button>
+                      </Button>
+                      <Button>
                         <Link href="/Analytics">Analytics</Link>
-                    </Button>
-                    <Button>
+                      </Button>
+                      <Button>
                         <Link href="/BankAccounts">Bank Accounts</Link>
-                    </Button>
-                </div>
+                      </Button>
+                    </div>
+                  )
             ) : (
                 <div className="flex gap-x-3">
                     <Button variant="outlined" color="primary" component={Link} href="/Login">

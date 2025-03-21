@@ -16,7 +16,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <Nav />
-                <div className="flex flex-grow w-full py-6 px-8">{children}</div>
+                <div>{children}</div>
             </body>
         </html>
     )
