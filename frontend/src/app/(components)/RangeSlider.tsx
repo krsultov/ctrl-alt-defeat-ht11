@@ -27,7 +27,7 @@ export default function RangeSlider() {
 
     return (
         <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
-            <Typography>Ammount:</Typography>
+            <Typography>Amount:</Typography>
             <Slider
                 step={10}
                 size="small"
