@@ -5,7 +5,7 @@ export default function Subscriptions(){
 
     
     return(
-        <div className="w-full">
+        <div>
 
             <div className="p-10">
                 <Typography variant="h5" fontWeight={600}>Subscriptions</Typography>
