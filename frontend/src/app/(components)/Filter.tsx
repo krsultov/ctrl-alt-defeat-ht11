@@ -5,14 +5,7 @@ import RangeManager from "./RangeManager";
 import DatePicker from "./DatePicker";
 import { useState } from "react";
 
-export default function Filter({ setItemCount }) {
-    const [itemCount, setItemCountState] = useState(5);
-
-    const handleItemCountChange = (event) => {
-        const count = event.target.value;
-        setItemCountState(count);
-        setItemCount(count);
-    };
+export default function Filter() {
 
     return (
         <div className="w-full flex justify-center">
@@ -25,7 +18,7 @@ export default function Filter({ setItemCount }) {
                 <div className="mb-5 pb-3 flex flex-col items-center w-full">
                     <div className="flex flex-row items-center">
                         <div className="w-[40%] flex-1/3 sm:">
-                            <SelectAutoWidth onChange={handleItemCountChange} />
+                            <SelectAutoWidth />
                         </div>
                         <div className="flex flex-2/3 items-center">
                             <DatePicker />

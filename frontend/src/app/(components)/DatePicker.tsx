@@ -8,10 +8,11 @@ import { DateTimeRangePicker } from '@mui/x-date-pickers-pro/DateTimeRangePicker
 import { useRef } from 'react';
 import { Dayjs } from 'dayjs';
 
-type DateRange = {
+export interface DateRange {
   startDate: string | undefined,
   endDate: string | undefined
 };
+
 export default function BasicDateTimeRangePicker() {
   const value = useRef<[Dayjs | null, Dayjs | null]>(null);
 
@@ -21,7 +22,7 @@ export default function BasicDateTimeRangePicker() {
     value.current = newValue
     dataRange.current.startDate = newValue[0]?.format("YYYY-MM-DD HH:mm");
     dataRange.current.endDate = newValue[1]?.format("YYYY-MM-DD HH:mm");
-    console.log(dataRange.current)
+    // console.log(dataRange.current)
   }
 
   return (

@@ -2,7 +2,8 @@
 
 import { Box, Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { FilterContext } from '../(contexts)/FilterContext';
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -12,6 +13,8 @@ const minDistance = 10;
 
 export default function RangeSlider() {
   const [value, setValue] = React.useState<number[]>([0, 40]);
+
+  const filter = useContext(FilterContext)
 
   const handleChange = (
     event: Event,
@@ -29,10 +32,18 @@ export default function RangeSlider() {
     }
   };
 
+  useEffect(() => {
+    console.log(filter?.SliderRange?.Min.value)
+    console.log(filter?.SliderRange?.Max.value)
+
+  }, [filter?.SliderRange?.Min.value, filter?.SliderRange?.Max.value])
+
   return (
     <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
         <Typography>Ammount:</Typography>
         <Slider
+            min={(filter?.SliderRange?.Min.value) ? filter?.SliderRange?.Min.value : value[0]}
+            max={(filter?.SliderRange?.Max.value) ? filter?.SliderRange?.Min.value : value[1]}
             step={10}
             size='small'
             marks
