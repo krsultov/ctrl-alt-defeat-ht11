@@ -9,4 +9,7 @@
 }
 
 @layer base {
+  body {
+    overflow-x: hidden;
+  }
 }
