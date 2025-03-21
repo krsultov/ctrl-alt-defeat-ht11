@@ -1,32 +1,46 @@
 "use client"
-
 import { Button, Card, CardContent, Grid, Typography } from "@mui/material"
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import loading from "../(assets)/loading.gif"
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
 
-interface AnalyticsData {
-    totalVisitors: number
-    totalSignups: number
-    totalLogins: number
-    conversionRate: number
+interface BankingData {
+    totalTransactions: number
+    totalDeposits: number
+    totalWithdrawals: number
+    totalRevenue: number
 }
 
 const Analytics: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [data, setData] = useState<AnalyticsData | null>(null)
+    const [data, setData] = useState<BankingData | null>(null)
 
     useEffect(() => {
         setTimeout(() => {
             setData({
-                totalVisitors: 5342,
-                totalSignups: 2103,
-                totalLogins: 4012,
-                conversionRate: 39
+                totalTransactions: 12543,
+                totalDeposits: 8700,
+                totalWithdrawals: 3600,
+                totalRevenue: 150000
             })
             setIsLoading(false)
         }, 2000)
     }, [])
+
+    const lineChartData = [
+        { name: "Jan", transactions: 3000 },
+        { name: "Feb", transactions: 4000 },
+        { name: "Mar", transactions: 3500 },
+        { name: "Apr", transactions: 5000 },
+        { name: "May", transactions: 4500 }
+    ]
+
+    const barChartData = [
+        { name: "Deposits", amount: 8700 },
+        { name: "Withdrawals", amount: 3600 },
+        { name: "Revenue", amount: 150000 }
+    ]
 
     if (isLoading) {
         return (
@@ -42,7 +56,7 @@ const Analytics: React.FC = () => {
         <div className="px-8 py-6 min-w-screen">
             <div className="flex justify-between items-center mb-8">
                 <Typography variant="h4" fontWeight={600}>
-                    Analytics
+                    Banking Analytics
                 </Typography>
                 <div className="flex gap-x-4">
                     <Button variant="outlined" color="primary">
@@ -59,10 +73,10 @@ const Analytics: React.FC = () => {
                     <Card className="shadow-lg">
                         <CardContent>
                             <Typography variant="h6" className="text-gray-500">
-                                Transactions
+                                Total Transactions
                             </Typography>
                             <Typography variant="h5" className="text-primary font-bold">
-                                {data.totalVisitors}
+                                {data.totalTransactions}
                             </Typography>
                         </CardContent>
                     </Card>
@@ -71,10 +85,10 @@ const Analytics: React.FC = () => {
                     <Card className="shadow-lg">
                         <CardContent>
                             <Typography variant="h6" className="text-gray-500">
-                                Total Signups
+                                Total Deposits
                             </Typography>
                             <Typography variant="h5" className="text-primary font-bold">
-                                {data.totalSignups}
+                                ${data.totalDeposits}
                             </Typography>
                         </CardContent>
                     </Card>
@@ -83,10 +97,10 @@ const Analytics: React.FC = () => {
                     <Card className="shadow-lg">
                         <CardContent>
                             <Typography variant="h6" className="text-gray-500">
-                                Total Logins
+                                Total Withdrawals
                             </Typography>
                             <Typography variant="h5" className="text-primary font-bold">
-                                {data.totalLogins}
+                                ${data.totalWithdrawals}
                             </Typography>
                         </CardContent>
                     </Card>
@@ -95,10 +109,10 @@ const Analytics: React.FC = () => {
                     <Card className="shadow-lg">
                         <CardContent>
                             <Typography variant="h6" className="text-gray-500">
-                                Conversion Rate
+                                Total Revenue
                             </Typography>
                             <Typography variant="h5" className="text-primary font-bold">
-                                {data.conversionRate}%
+                                ${data.totalRevenue}
                             </Typography>
                         </CardContent>
                     </Card>
@@ -108,17 +122,31 @@ const Analytics: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white p-6 shadow-lg">
                     <Typography variant="h6" className="text-gray-600 mb-4">
-                        Traffic Overview (Line Chart)
+                        Transactions Overview (Line Chart)
                     </Typography>
-                    <div className="h-64 bg-gray-200 flex items-center justify-center">
-                        <span>Line Chart Placeholder</span>
-                    </div>
+                    <ResponsiveContainer width="100%" height={250}>
+                        <LineChart data={lineChartData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Line type="monotone" dataKey="transactions" stroke="#3b82f6" strokeWidth={2} />
+                        </LineChart>
+                    </ResponsiveContainer>
                 </div>
                 <div className="bg-white p-6 shadow-lg">
-                    <Typography variant="h6" className="text-gray-600 mb-4"></Typography>
-                    <div className="h-64 bg-gray-200 flex items-center justify-center">
-                        <span>Bar Chart Placeholder</span>
-                    </div>
+                    <Typography variant="h6" className="text-gray-600 mb-4">
+                        Revenue Breakdown (Bar Chart)
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={250}>
+                        <BarChart data={barChartData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Bar dataKey="amount" fill="#3b82f6" barSize={40} />
+                        </BarChart>
+                    </ResponsiveContainer>
                 </div>
             </div>
         </div>
