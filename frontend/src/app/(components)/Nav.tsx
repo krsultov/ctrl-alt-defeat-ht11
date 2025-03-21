@@ -10,7 +10,6 @@ const Nav: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
     const screenWidth = useScreenWidth()
 
-
     useEffect(() => {
         setIsAuth(true)
     }, [])
@@ -28,30 +27,30 @@ const Nav: React.FC = () => {
                 
                 screenWidth <= 700 ? (
                     <div>
-                        <TopDrawer/>
+                        <TopDrawer />
                     </div>
-                  ) : (
+                ) : (
                     <div className="flex items-center justify-between">
-                      <Button>
-                        <Link href="/Transactions">Transactions</Link>
-                      </Button>
-                      <Button>
-                        <Link href="/Subscriptions">Subscriptions</Link>
-                      </Button>
-                      <Button>
-                        <Link href="/Analytics">Analytics</Link>
-                      </Button>
-                      <Button>
-                        <Link href="/BankAccounts">Bank Accounts</Link>
-                      </Button>
+                        <Button style={{ backgroundColor: "#1B4965" }}>
+                            <Link href="/Transactions">Transactions</Link>
+                        </Button>
+                        <Button style={{ backgroundColor: "#1B4965" }}>
+                            <Link href="/Subscriptions">Subscriptions</Link>
+                        </Button>
+                        <Button style={{ backgroundColor: "#1B4965" }}>
+                            <Link href="/Analytics">Analytics</Link>
+                        </Button>
+                        <Button style={{ backgroundColor: "#1B4965" }}>
+                            <Link href="/BankAccounts">Bank Accounts</Link>
+                        </Button>
                     </div>
-                  )
+                )
             ) : (
                 <div className="flex gap-x-3">
-                    <Button variant="outlined" color="primary" component={Link} href="/Login">
+                    <Button variant="outlined" style={{ backgroundColor: "#1B4965" }} component={Link} href="/Login">
                         Login
                     </Button>
-                    <Button variant="contained" color="primary" component={Link} href="/Signup">
+                    <Button variant="contained" style={{ backgroundColor: "#1B4965" }} component={Link} href="/Signup">
                         Signup
                     </Button>
                 </div>

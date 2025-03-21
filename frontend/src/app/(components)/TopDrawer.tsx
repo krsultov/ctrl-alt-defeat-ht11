@@ -10,23 +10,20 @@ import Link from 'next/link';
 import Divider from '@mui/material/Divider';
 
 export default function TopDrawer() {
-  const [state, setState] = React.useState({
-    top: false,
-  });
+    const [state, setState] = React.useState({
+        top: false
+    })
 
-  const toggleDrawer =
-    (open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+            event.type === "keydown" &&
+            ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")
+        ) {
+            return
+        }
 
-      setState({ ...state, top: open });
-    };
+        setState({ ...state, top: open })
+    }
 
   const list = () => (
     <Box
@@ -71,16 +68,14 @@ export default function TopDrawer() {
     </Box>
   );
 
-  return (
-    <div>
-      <Button onClick={toggleDrawer(true)}><DensityMediumIcon/></Button>
-      <Drawer
-        anchor="top"
-        open={state.top}
-        onClose={toggleDrawer(false)}
-      >
-        {list()}
-      </Drawer>
-    </div>
-  );
+    return (
+        <div>
+            <Button style={{ backgroundColor: "#1B4965" }} onClick={toggleDrawer(true)}>
+                <DensityMediumIcon />
+            </Button>
+            <Drawer anchor="top" open={state.top} onClose={toggleDrawer(false)}>
+                {list()}
+            </Drawer>
+        </div>
+    )
 }

@@ -8,56 +8,61 @@ const BankAccounts = () => {
         { id: 1, name: "Checking Account", balance: 1234.56 },
         { id: 2, name: "Savings Account", balance: 7890.12 },
         { id: 3, name: "Business Account", balance: 3456.78 }
-    ]);
+    ])
 
-    const [open, setOpen] = useState(false);
-    const [currentAccount, setCurrentAccount] = useState({ id: 0, name: "", balance: 0 });
-    const [isEditing, setIsEditing] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [currentAccount, setCurrentAccount] = useState({ id: 0, name: "", balance: 0 })
+    const [isEditing, setIsEditing] = useState(false)
 
     const handleOpen = (account = { id: 0, name: "", balance: 0 }) => {
-        setCurrentAccount(account);
-        setIsEditing(account.id !== 0);
-        setOpen(true);
-    };
+        setCurrentAccount(account)
+        setIsEditing(account.id !== 0)
+        setOpen(true)
+    }
 
     const handleClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     const handleSave = () => {
         if (isEditing) {
-            setAccounts(accounts.map(account => 
-                account.id === currentAccount.id ? currentAccount : account
-            ));
+            setAccounts(accounts.map((account) => (account.id === currentAccount.id ? currentAccount : account)))
         } else {
-            setAccounts([...accounts, { ...currentAccount, id: accounts.length + 1 }]);
+            setAccounts([...accounts, { ...currentAccount, id: accounts.length + 1 }])
         }
-        handleClose();
-    };
+        handleClose()
+    }
 
     const handleDelete = () => {
-        setAccounts(accounts.filter(account => account.id !== currentAccount.id));
-        handleClose();
-    };
+        setAccounts(accounts.filter((account) => account.id !== currentAccount.id))
+        handleClose()
+    }
 
     return (
-        <Box p={3} sx={{ width: '100%' }}>
-            <Button variant="contained" color="primary" onClick={() => handleOpen()}>
+        <Box p={3} sx={{ width: "100%" }}>
+            <Button variant="contained" style={{ backgroundColor: "#1B4965" }} onClick={() => handleOpen()}>
                 Add Bank Account
             </Button>
-            <Box mt={3} sx={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 3,
-                width: '100%',
-            }}>
+            <Box
+                mt={3}
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, 1fr)",
+                    gap: 3,
+                    width: "100%"
+                }}
+            >
                 {accounts.map((account) => (
-                    <Box key={account.id} sx={{ minWidth: '300px' }}>
+                    <Box key={account.id} sx={{ minWidth: "300px" }}>
                         <Paper elevation={3}>
                             <Box p={3} borderRadius={4}>
                                 <Typography variant="h6">{account.name}</Typography>
                                 <Typography variant="body1">Balance: ${account.balance.toFixed(2)}</Typography>
-                                <Button variant="contained" color="primary" onClick={() => handleOpen(account)}>
+                                <Button
+                                    variant="contained"
+                                    style={{ backgroundColor: "#1B4965" }}
+                                    onClick={() => handleOpen(account)}
+                                >
                                     Edit
                                 </Button>
                             </Box>
@@ -66,7 +71,11 @@ const BankAccounts = () => {
                 ))}
             </Box>
             <Modal open={open} onClose={handleClose}>
-                <Box p={3} bgcolor="background.paper" style={{ margin: 'auto', marginTop: '10%', width: '300px', borderRadius: '8px' }}>
+                <Box
+                    p={3}
+                    bgcolor="background.paper"
+                    style={{ margin: "auto", marginTop: "10%", width: "300px", borderRadius: "8px" }}
+                >
                     <Typography variant="h6">{isEditing ? "Edit Account" : "Add Account"}</Typography>
                     <TextField
                         fullWidth
@@ -83,15 +92,15 @@ const BankAccounts = () => {
                         value={currentAccount.balance}
                         onChange={(e) => setCurrentAccount({ ...currentAccount, balance: parseFloat(e.target.value) })}
                     />
-                    <Box mt={2} display="flex"  gap={0.5}>
-                            <Button variant="contained" color="primary" onClick={handleSave}>
-                                Save
-                            </Button>
-                            <Button variant="contained" onClick={handleClose}>
-                                Cancel
-                            </Button>
+                    <Box mt={2} display="flex" gap={0.5}>
+                        <Button variant="contained" style={{ backgroundColor: "#1B4965" }} onClick={handleSave}>
+                            Save
+                        </Button>
+                        <Button variant="contained" style={{ backgroundColor: "#1B4965" }} onClick={handleClose}>
+                            Cancel
+                        </Button>
                         {isEditing && (
-                            <Button variant="contained" color="secondary" onClick={handleDelete}>
+                            <Button variant="contained" style={{ backgroundColor: "#1B4965" }} onClick={handleDelete}>
                                 Delete
                             </Button>
                         )}
