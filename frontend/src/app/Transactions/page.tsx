@@ -10,14 +10,16 @@ import {
     TableRow,
     Paper,
     Typography,
-    TablePagination,
-    CircularProgress
+    TablePagination
 } from "@mui/material"
+
+import Image from "next/image" // ✅ Import if using Next.js
+import loading2 from "../(assets)/loading.gif"
 import { styled } from "@mui/material/styles"
 import Filter from "../(components)/Filter"
 
 // Styled components
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
     fontWeight: "bold",
     backgroundColor: "#f5f5f5",
     borderBottom: "1px solid #ddd",
@@ -82,20 +84,21 @@ export default function Transactions() {
     const paginatedTransactions = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     return (
-        <div>
+        <div className="min-w-screen pt-8 px-6">
             <div className="m-10">
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                <Typography variant="h5" fontWeight="bold" gutterBottom>
                     Transactions
                 </Typography>
             </div>
 
-                <div className="my-[5%]">
-                    <Filter />
-                </div>
+            <div className="my-[5%]">
+                <Filter/>
+            </div>
 
             {loading ? (
                 <div className="flex justify-center items-center py-10">
-                    <CircularProgress />
+                    <Image src={loading2} alt="loading..." width={50} height={50} />{" "}
+                    {/* ✅ Ensure correct width/height */}
                 </div>
             ) : (
                 <>

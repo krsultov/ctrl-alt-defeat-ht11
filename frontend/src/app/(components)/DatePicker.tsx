@@ -9,10 +9,11 @@ import { useRef } from 'react';
 import { Dayjs } from 'dayjs';
 import { Box, Typography } from '@mui/material';
 
-type DateRange = {
+export interface DateRange {
   startDate: string | undefined,
   endDate: string | undefined
 };
+
 export default function BasicDateTimeRangePicker() {
   const value = useRef<[Dayjs | null, Dayjs | null]>(null);
 
@@ -21,7 +22,7 @@ export default function BasicDateTimeRangePicker() {
   function handleChange(newValue: [Dayjs | null, Dayjs | null]) {
     value.current = newValue
     dataRange.current.startDate = newValue[0]?.format("YYYY-MM-DD");
-    dataRange.current.endDate = newValue[1]?.format("YYYY-MM-DDm");
+    dataRange.current.endDate = newValue[1]?.format("YYYY-MM-DD");
     console.log(dataRange.current)
   }
 
