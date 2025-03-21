@@ -13,7 +13,9 @@ export default function Home() {
                     <span className="text-gray-400">Redefining the way you pay.</span>
                 </Typography>
                 <Link href="/Signup">
-                    <Button variant="contained">Get Started</Button>
+                    <Button variant="contained" style={{ backgroundColor: "#1B4965" }}>
+                        Get Started
+                    </Button>
                 </Link>
             </div>
         </div>
