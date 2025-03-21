@@ -1,18 +1,22 @@
 import React from "react"
 import Link from "next/link"
-import { Box, Button, Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
+
 const Nav = () => {
     return (
-        <div className="flex bg-accent-light justify-between">
-            <Typography className="text-3xl">Logo</Typography>
-            <Box>
-                <Button variant="outlined" color="primary">
-                    <Link href={"/Signup"}>Signup</Link>
+        <div className="flex bg-accent-light justify-between p-3">
+            <Typography variant="h4">
+                <span className="text-primary font-bold">identi</span>
+                <span className="text-secondary font-bold">Pay</span>
+            </Typography>
+            <div className="flex gap-x-3">
+                <Button variant="outlined" color="primary" component={Link} href="/Signup">
+                    Signup
                 </Button>
-                <Button variant="contained" color="primary">
-                    <Link href={"/Login"}>Login</Link>
+                <Button variant="contained" color="primary" component={Link} href="/Login">
+                    Login
                 </Button>
-            </Box>
+            </div>
         </div>
     )
 }
