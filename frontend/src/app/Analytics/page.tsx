@@ -53,7 +53,7 @@ const Analytics: React.FC = () => {
     }
 
     return (
-        <div className="min-w-screen">
+        <div className="min-w-screen pt-8 px-6">
             <div className="flex justify-between items-center mb-8">
                 <Typography variant="h4" fontWeight={600}>
                     Banking Analytics
