@@ -58,14 +58,6 @@ const Analytics: React.FC = () => {
                 <Typography variant="h4" fontWeight={600}>
                     Banking Analytics
                 </Typography>
-                <div className="flex gap-x-4">
-                    <Button variant="outlined" color="primary">
-                        Date Range
-                    </Button>
-                    <Button variant="contained" color="primary">
-                        Export
-                    </Button>
-                </div>
             </div>
 
             <Grid container spacing={4} className="mb-8">
