@@ -15,32 +15,17 @@ export default function SelectAutoWidth() {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: "90%" }}>
-                <InputLabel style={{ color: "#1B4965" }} id="demo-simple-select-autowidth-label">
-                    Last
-                </InputLabel>
+            <FormControl sx={{ m: 1, width: 0.9 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">Last</InputLabel>
                 <Select
                     labelId="demo-simple-select-autowidth-label"
                     id="demo-simple-select-autowidth"
                     value={amount}
                     onChange={handleChange}
                     autoWidth
-                    label="amount"
-                    sx={{
-                        "& .MuiInputBase-root": {
-                            borderColor: "#1B4965"
-                        },
-                        "& .MuiInputLabel-root": {
-                            color: "#1B4965"
-                        },
-                        "&:focus": {
-                            color: "#1B4965"
-                        }
-                    }}
+                    label="ammount"
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={10}>10</MenuItem>
                     <MenuItem value={20}>20</MenuItem>
                     <MenuItem value={50}>50</MenuItem>
