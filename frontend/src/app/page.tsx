@@ -1,12 +1,10 @@
-import Link from "next/link";
+import Nav from "./Components/Nav"
 
 export default function Home() {
-  return (
-    <div className="flex flex-col">
-        <div className="text-3xl">Home Page</div>
-        <Link href={"/Register"}>Register</Link>
-        <Link href={"/Login"}>Login</Link>
-
-    </div>
-  );
+    return (
+        <div>
+            <Nav />
+            <div className="text-3xl">Home Page</div>
+        </div>
+    )
 }
