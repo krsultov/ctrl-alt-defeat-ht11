@@ -30,23 +30,23 @@ const Nav: React.FC = () => {
                     </div>
                 ) : (
                     <div className="flex items-center justify-between">
-                        <Button style={{ backgroundColor: "#1B4965" }}>
+                        <Button>
                             <Link href="/Transactions">Transactions</Link>
                         </Button>
-                        <Button style={{ backgroundColor: "#1B4965" }}>
+                        <Button>
                             <Link href="/Subscriptions">Subscriptions</Link>
                         </Button>
-                        <Button style={{ backgroundColor: "#1B4965" }}>
+                        <Button>
                             <Link href="/Analytics">Analytics</Link>
                         </Button>
-                        <Button style={{ backgroundColor: "#1B4965" }}>
+                        <Button>
                             <Link href="/BankAccounts">Bank Accounts</Link>
                         </Button>
                     </div>
                 )
             ) : (
                 <div className="flex gap-x-3">
-                    <Button variant="outlined" style={{ backgroundColor: "#1B4965" }} component={Link} href="/Login">
+                    <Button variant="outlined" component={Link} href="/Login">
                         Login
                     </Button>
                     <Button variant="contained" style={{ backgroundColor: "#1B4965" }} component={Link} href="/Signup">
