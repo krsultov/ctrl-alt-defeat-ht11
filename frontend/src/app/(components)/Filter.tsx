@@ -1,14 +1,8 @@
 import { Typography, TextField } from "@mui/material";
 import SelectAutoWidth from "./SelectAutoWidth";
-<<<<<<< HEAD
 import DatePicker from "./DatePicker";
 import RangeSlider from "./RangeSlider";
 import { useState } from "react";
-=======
-import RangeManager from "./RangeManager";
-import DatePicker from "./DatePicker";
-import RangeSlider from "./RangeSlider";
->>>>>>> 848a55b7e5c9178913ed54526b1e56067de9e6be
 
 export default function Filter() {
 
