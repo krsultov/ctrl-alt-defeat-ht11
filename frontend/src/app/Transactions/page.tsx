@@ -13,6 +13,7 @@ import {
     TablePagination
 } from "@mui/material"
 import { styled } from "@mui/material/styles"
+import Filter from "../(components)/Filter"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: "bold",
@@ -54,6 +55,11 @@ export default function Transactions() {
             <Typography variant="h6" fontWeight="bold" gutterBottom>
                 Transactions
             </Typography>
+
+            <div className="p-10">
+                <Filter/>
+            </div>
+
             <TableContainer component={Paper} sx={{ width: "100%", borderRadius: 2, overflow: "hidden" }}>
                 <Table sx={{ minWidth: "100%" }} aria-label="customized table">
                     <TableHead>
