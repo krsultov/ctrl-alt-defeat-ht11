@@ -1,6 +1,6 @@
 'use client'
 
-import { Box,  TextField,  Typography } from "@mui/material"
+import { Box,  Divider,  TextField,  Typography } from "@mui/material"
 
 export default function RangeManager(){
 
@@ -21,6 +21,9 @@ export default function RangeManager(){
                     <Typography>Min: </Typography>
                     <TextField size="small" type="number" sx={{width: 0.8}} id="Min" />
                     <Typography>$</Typography>
+                </div>
+                <div>
+                    <Divider orientation="vertical"/>
                 </div>
                 <div className="flex gap-2 items-center">
                     <Typography>Max: </Typography>

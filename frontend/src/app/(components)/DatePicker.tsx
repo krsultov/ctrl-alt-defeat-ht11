@@ -26,7 +26,7 @@ export default function BasicDateTimeRangePicker() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer  components={['DateTimeRangePicker']}>
+      <DemoContainer sx={{p:0}}  components={['DateTimeRangePicker']}>
         <DateTimeRangePicker onChange={(e) => handleChange(e)} localeText={{ start: 'from', end: 'to' }} />
       </DemoContainer>
     </LocalizationProvider>
