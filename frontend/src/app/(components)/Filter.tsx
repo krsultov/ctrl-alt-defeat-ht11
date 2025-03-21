@@ -5,6 +5,11 @@ import RangeSlider from "./RangeSlider";
 import { useState } from "react";
 
 export default function Filter() {
+    const [itemCount, setItemCount] = useState<number>(0);
+
+    const handleItemCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setItemCount(Number(event.target.value));
+    };
 
     return (
         <div className="w-full flex justify-center">

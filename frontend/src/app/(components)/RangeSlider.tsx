@@ -25,11 +25,10 @@ export default function RangeSlider() {
       return;
     }
 
-        if (activeThumb === 0) {
-            setValue([Math.min(newValue[0], value[1] - minDistance), value[1]])
-        } else {
-            setValue([value[0], Math.max(newValue[1], value[0] + minDistance)])
-        }
+    if (activeThumb === 0) {
+      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]])
+    } else {
+      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)])
     }
   };
 
@@ -41,37 +40,21 @@ export default function RangeSlider() {
 
   return (
     <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
-        <Typography>Ammount:</Typography>
-        <Slider
-            min={(filter?.SliderRange?.Min.value) ? filter?.SliderRange?.Min.value : value[0]}
-            max={(filter?.SliderRange?.Max.value) ? filter?.SliderRange?.Min.value : value[1]}
-            step={10}
-            size='small'
-            marks
-            getAriaLabel={() => 'Minimum distance'}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-            disableSwap
-        />
+      <Typography>Amount:</Typography>
+      <Slider
+        min={(filter?.SliderRange?.Min.value) ? filter?.SliderRange?.Min.value : value[0]}
+        max={(filter?.SliderRange?.Max.value) ? filter?.SliderRange?.Min.value : value[1]}
+        step={10}
+        size='small'
+        marks
+        getAriaLabel={() => 'Minimum distance'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        disableSwap
+      />
     </Box>
   );
-    return (
-        <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
-            <Typography>Amount:</Typography>
-            <Slider
-                step={10}
-                size="small"
-                marks
-                style={{ color: "#1B4965" }}
-                getAriaLabel={() => "Minimum distance"}
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-                disableSwap
-            />
-        </Box>
-    )
 }
+
