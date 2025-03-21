@@ -3,6 +3,8 @@ import { Repository } from "typeorm"
 import { User } from "@entities/User"
 import { DIDDocument, IDidService } from "@interfaces/did.interfaces"
 import base58 from "bs58"
+import redis from "@utils/redis"
+import * as crypto from "node:crypto"
 
 export class DidService implements IDidService {
     private readonly userRepository: Repository<User>
@@ -21,6 +23,15 @@ export class DidService implements IDidService {
         const didId = base58.encode(Buffer.from(publicKey.toString(), "utf-8"))
 
         const did = `did:identiPay:${didUrl}:${didId}`
+
+        const user = this.userRepository.create({
+            did,
+            status: "pending",
+            publicKey: publicKey.toString(),
+            metadata: {}
+        })
+
+        await this.userRepository.save(user)
 
         return { did, publicKey: publicKey.toString(), privateKey: privateKey.toString() }
     }
@@ -54,6 +65,16 @@ export class DidService implements IDidService {
 
     async requestChallenge(did: string): Promise<string> {
         const challenge = randomBytes(128).toString("hex")
+        await redis.set("challenge:" + did, challenge, "EX", 120)
         return challenge
+    }
+
+    async verifyChallenge(did: string, signedChallenge: string): Promise<boolean> {
+        const storedChallenge = await redis.get("challenge:" + did)
+        if (!storedChallenge) {
+            return false
+        }
+        const publicKey = base58.decode(did.split(":")[-1].toString()).toString()
+        return crypto.verify("rsa", Buffer.from(storedChallenge), publicKey, Buffer.from(signedChallenge))
     }
 }

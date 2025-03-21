@@ -34,3 +34,8 @@ export interface IDidController {
 
     requestChallenge(req: Request, res: Response): Promise<Response>
 }
+
+export enum IntentId {
+    DATA,
+    POLLING
+}

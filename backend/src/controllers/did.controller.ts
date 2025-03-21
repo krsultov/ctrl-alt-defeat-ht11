@@ -24,7 +24,7 @@ export class DidController implements IDidController {
 
     @boundMethod
     async requestChallenge(req: Request, res: Response) {
-        const did = req.params.did
+        const did = req.query.did as string;
         const challenge = await this.didService.requestChallenge(did)
         return res.json({ challenge })
     }

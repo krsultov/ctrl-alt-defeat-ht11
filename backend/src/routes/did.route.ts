@@ -9,10 +9,12 @@ const userRepository = AppDataSource.getRepository(User)
 const didService = new DidService(userRepository)
 const didController = new DidController(didService)
 
-didRouter.get("/api/did/generate", didController.generateDID)
+didRouter.get("/did/generate", didController.generateDID)
 
 didRouter.get("/.well-known/did.json", didController.resolveDIDDoc)
 
 didRouter.get("/did/challenge", didController.requestChallenge)
+
+
 
 export { didRouter }
