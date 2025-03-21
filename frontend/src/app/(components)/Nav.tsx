@@ -26,7 +26,7 @@ const Nav: React.FC = () => {
 
             {isAuth ? (
                 
-                screenWidth <= 600 ? (
+                screenWidth <= 700 ? (
                     <div>
                         <TopDrawer/>
                     </div>

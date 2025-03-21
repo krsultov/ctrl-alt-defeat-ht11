@@ -83,13 +83,15 @@ export default function Transactions() {
 
     return (
         <div>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-                Transactions
-            </Typography>
-
-            <div className="p-10">
-                <Filter />
+            <div className="m-10">
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    Transactions
+                </Typography>
             </div>
+
+                <div className="my-[5%]">
+                    <Filter />
+                </div>
 
             {loading ? (
                 <div className="flex justify-center items-center py-10">
