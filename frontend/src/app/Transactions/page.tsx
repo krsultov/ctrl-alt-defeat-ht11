@@ -84,15 +84,15 @@ export default function Transactions() {
     const paginatedTransactions = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     return (
-        <div>
+        <div className="min-w-screen pt-8 px-6">
             <div className="m-10">
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                <Typography variant="h5" fontWeight="bold" gutterBottom>
                     Transactions
                 </Typography>
             </div>
 
             <div className="my-[5%]">
-                <Filter setItemCount={() => {}} /> {/* ✅ Fixed issue with setItemCount */}
+                <Filter/>
             </div>
 
             {loading ? (

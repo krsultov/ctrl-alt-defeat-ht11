@@ -21,7 +21,7 @@ const subscriptions = [
 
 const SubscriptionGrid: React.FC = () => {
     return (
-        <div>
+        <div className="min-w-screen pt-8 px-6">
             <div className="p-10">
                 <Typography variant="h5" fontWeight={600}>
                     Subscriptions
