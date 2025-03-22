@@ -1,48 +1,26 @@
 'use client'
 
 import { Box,  Divider,  TextField,  Typography } from "@mui/material"
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { FilterContext } from "../(contexts)/FilterContext";
 
-export interface RangeStateTypes {
-    Min:{
-        value: number,
-        setValue: Dispatch<SetStateAction<number>>
-    },
-    Max:{
-        value: number,
-        setValue: Dispatch<SetStateAction<number>>
-    }
-}
-
 export default function RangeManager(){
-    const[minValue, setMinValue] = useState(0);
-    const[maxValue, setMaxValue] = useState(100);
 
     const filter = useContext(FilterContext)
 
-    if(filter){
-        filter.SliderRange = {
-            Min:{
-                value: minValue,
-                setValue: setMinValue
-            },
-            Max:{
-                value: maxValue,
-                setValue: setMaxValue
-            }
-        }
-    }
+    useEffect(() => {
+
+    })
     
     function handleChangeMin(value:string | null){
         if(value){
-            setMinValue(parseInt(value))
+            filter!.setSliderValues({maxValue: filter!.sliderValues.maxValue, minValue: parseInt(value)})
         }
     }
 
     function handleChangeMax(value:string | null){
         if(value){
-            setMaxValue(parseInt(value))
+            filter!.setSliderValues({maxValue: parseInt(value), minValue: filter!.sliderValues.minValue})
         }
     }
 
@@ -60,7 +38,7 @@ export default function RangeManager(){
             >
                 <div className="flex gap-2 items-center">
                     <Typography>Min: </Typography>
-                    <TextField onChange={(e) => {handleChangeMin(e.currentTarget.value)}} size="small" type="number" sx={{width: 0.8}} id="Min" />
+                    <TextField defaultValue={filter!.sliderValues.minValue} onChange={(e) => {handleChangeMin(e.currentTarget.value)}} size="small" type="number" sx={{width: 0.8}} id="Min" />
                     <Typography>$</Typography>
                 </div>
                 <div>
@@ -68,7 +46,7 @@ export default function RangeManager(){
                 </div>
                 <div className="flex gap-2 items-center">
                     <Typography>Max: </Typography>
-                    <TextField onChange={(e) => {handleChangeMax(e.currentTarget.value)}} size="small" type="number" sx={{width: 0.8}} id="Max" />
+                    <TextField defaultValue={filter!.sliderValues.maxValue} onChange={(e) => {handleChangeMax(e.currentTarget.value)}} size="small" type="number" sx={{width: 0.8}} id="Max" />
                     <Typography>$</Typography>
                 </div>
             </Box>

@@ -4,19 +4,16 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Dispatch, SetStateAction } from 'react';
-
-export interface LastSelectType{
-  ammountPerPage: number,
-  setAmmountPerPage: Dispatch<SetStateAction<number>>
-}
+import Select from '@mui/material/Select';
+import { useContext } from 'react';
+import { FilterContext } from '../(contexts)/FilterContext';
 
 export default function SelectAutoWidth() {
-    const [amount, setAmount] = React.useState("")
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAmount(event.target.value)
+    const filter = useContext(FilterContext)
+
+    const handleChange = (value: "5" | "10" | "20" | "50") => {
+        filter?.setLastSelect(value)
     }
 
     return (
@@ -26,8 +23,8 @@ export default function SelectAutoWidth() {
                 <Select
                     labelId="demo-simple-select-autowidth-label"
                     id="demo-simple-select-autowidth"
-                    value={amount}
-                    onChange={handleChange}
+                    value={filter?.lastSelect}
+                    onChange={(event) => handleChange(event.target.value)}
                     autoWidth
                     label="ammount"
                 >
