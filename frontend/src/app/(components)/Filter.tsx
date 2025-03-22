@@ -9,7 +9,7 @@ import { useState } from "react";
 import RangeManager from "./RangeManager";
 
 export default function Filter() {
-    const[values, setValues] = useState({maxValue: 100, minValue: 0})
+    const[values, setValues] = useState({maxValue: 40, minValue: 0})
     const [amount, setAmount] = useState<"5" | "10" | "20" | "50">("5")
     const [SliderCurrent, setSliderCurrent] = useState<number[]>([0, 40]);
     const [itemCount, setItemCount] = useState<number>(0);

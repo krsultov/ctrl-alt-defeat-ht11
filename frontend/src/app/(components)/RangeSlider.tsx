@@ -30,13 +30,17 @@ export default function RangeSlider() {
         } else {
             filter!.setSliderCurrent([filter!.sliderCurrent[0], Math.max(newValue[1], filter!.sliderCurrent[0] + minDistance)])
         }
+
+        filter?.setSliderValues({minValue: filter.sliderCurrent[0], maxValue: filter.sliderCurrent[1]})
     }
 
   return (
     <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
         <Typography>Ammount:</Typography>
         <Slider
-            step={10}
+            min={filter?.sliderValues.minValue}
+            max={filter?.sliderValues.maxValue}
+            step={5}
             size='small'
             marks
             getAriaLabel={() => 'Minimum distance'}
