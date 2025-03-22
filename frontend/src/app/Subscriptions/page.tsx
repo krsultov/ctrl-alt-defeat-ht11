@@ -1,9 +1,6 @@
 "use client"
 
 import { Typography } from "@mui/material"
-import { useContext } from "react"
-import { FilterContext } from "../(contexts)/FilterContext"
-import Filter from "../(components)/Filter"
 
 const subscriptions = [
     { title: "Netflix Personal HD", price: 7.99, period: "Monthly" },
@@ -21,12 +18,6 @@ const subscriptions = [
 ]
 
 const SubscriptionGrid: React.FC = () => {
-    const filter = useContext(FilterContext)
-
-    const filteredSubscriptions = subscriptions.filter(
-        (sub) => sub.price >= filter!.sliderCurrent[0] && sub.price <= filter!.sliderCurrent[1]
-    )
-
     return (
         <div className="min-w-screen pt-8 px-6">
             <div className="p-10">
@@ -35,11 +26,10 @@ const SubscriptionGrid: React.FC = () => {
                 </Typography>
             </div>
 
-            <Filter />
             <div className="max-h-screen flex px-6 py-8">
                 <div className="w-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                        {filteredSubscriptions.map((sub, index) => (
+                        {subscriptions.map((sub, index) => (
                             <div
                                 key={index}
                                 className="p-6 flex flex-col rounded-lg bg-white"

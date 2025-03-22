@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import {
     Table,
     TableBody,
@@ -12,9 +12,7 @@ import {
     Typography,
     TablePagination
 } from "@mui/material"
-import { FilterContext } from "../(contexts)/FilterContext"
 import dayjs from "dayjs"
-import Filter from "../(components)/Filter"
 
 // Transaction type
 interface Transaction {
@@ -39,16 +37,10 @@ const generateDummyTransactions = (count: number): Transaction[] => {
 }
 
 export default function Transactions() {
-    const filter = useContext(FilterContext)
     const [transactions, setTransactions] = useState<Transaction[]>([])
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(5)
-
-    if (!filter) {
-        // Context is unavailable
-        return <div>Loading or Error: Context is not available</div>
-    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -57,27 +49,8 @@ export default function Transactions() {
         }, 1000)
     }, [])
 
-    // Debug: Check the current filter state
-    console.log("Current Filter:", filter)
-
-    const filteredTransactions = transactions.filter((tx) => {
-        const amountInRange = tx.amount >= filter.sliderCurrent[0] && tx.amount <= filter.sliderCurrent[1]
-
-        // Debug: Check if the transaction amount is within range
-        console.log("Amount Check:", tx.amount, filter.sliderCurrent[0], filter.sliderCurrent[1], amountInRange)
-
-        const createdAtDate = dayjs(tx.createdAt)
-        const dateInRange =
-            (!filter.dateRange.startDate || createdAtDate.isAfter(filter.dateRange.startDate)) &&
-            (!filter.dateRange.endDate || createdAtDate.isBefore(filter.dateRange.endDate))
-
-        // Debug: Check if the transaction date is within range
-        console.log("Date Check:", tx.createdAt, filter.dateRange.startDate, filter.dateRange.endDate, dateInRange)
-
-        return amountInRange && dateInRange
-    })
-
-    const paginatedTransactions = filteredTransactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    // Pagination logic
+    const paginatedTransactions = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     return (
         <div className="min-w-screen pt-8 px-6">
@@ -85,10 +58,6 @@ export default function Transactions() {
                 <Typography variant="h5" fontWeight="bold" gutterBottom>
                     Transactions
                 </Typography>
-            </div>
-
-            <div className="my-[5%]">
-                <Filter />
             </div>
 
             {loading ? (
@@ -127,7 +96,7 @@ export default function Transactions() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={filteredTransactions.length}
+                        count={transactions.length} // Count the total transactions
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={(_, newPage) => setPage(newPage)}
