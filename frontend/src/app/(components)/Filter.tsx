@@ -6,6 +6,7 @@ import DatePicker from "./DatePicker";
 import RangeSlider from "./RangeSlider";
 import { FilterContext } from "../(contexts)/FilterContext";
 import { useState } from "react";
+import RangeManager from "./RangeManager";
 
 export default function Filter() {
     const[values, setValues] = useState({maxValue: 100, minValue: 0})
