@@ -9,6 +9,13 @@ export class DidController implements IDidController {
         this.didService = didService
     }
 
+    async registerDid(req: Request, res: Response) {
+        const did = req.body.did as string
+        const user = await this.didService.registerDid(did)
+
+        return res.json(user)
+    }
+
     @boundMethod
     async generateDID(req: Request, res: Response) {
         const didUrl = process.env.DID_URL!

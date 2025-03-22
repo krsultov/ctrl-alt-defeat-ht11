@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import { User } from "@entities/User"
 
 export interface DIDDocument {
     "@context": string | string[]
@@ -25,6 +26,8 @@ export interface IDidService {
     resolveDIDDoc(did: string): DIDDocument
 
     requestChallenge(did: string): Promise<string>
+
+    registerDid(did: string): Promise<User>
 }
 
 export interface IDidController {
@@ -33,6 +36,8 @@ export interface IDidController {
     resolveDIDDoc(req: Request, res: Response): Promise<Response>
 
     requestChallenge(req: Request, res: Response): Promise<Response>
+
+    registerDid(req: Request, res: Response): Promise<Response>
 }
 
 export enum IntentId {

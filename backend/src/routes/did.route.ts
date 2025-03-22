@@ -11,6 +11,8 @@ const didController = new DidController(didService)
 
 didRouter.get("/did/generate", didController.generateDID)
 
+didRouter.post("/did/register", didController.registerDid)
+
 didRouter.get("/.well-known/did.json", didController.resolveDIDDoc)
 
 didRouter.get("/did/challenge", didController.requestChallenge)
