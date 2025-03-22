@@ -1,12 +1,8 @@
-// layout.tsx
 import { Metadata } from "next" // Import Metadata from Next.js
 import Nav from "./(components)/Nav" // Your Nav component
 import "./globals.css" // Your global styles
-import FilterContextProvider from "./(contexts)/FilterContextProvider"
+import FilterContextProvider from "./(contexts)/FilterContextProvider" // Make sure this is correct
 
-// No "use client" directive here, since this is a server-side component
-
-// Server component: metadata should be used in server components
 export const metadata: Metadata = {
     title: "IdentiPay",
     description: "IdentiPay"

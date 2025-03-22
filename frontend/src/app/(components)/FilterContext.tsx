@@ -1,22 +1,23 @@
 "use client"
 
 import { createContext, useState } from "react"
+import { Dayjs } from "dayjs"
 
-interface FilterContextType {
-    sliderValues: { minValue: number; maxValue: number }
+export interface FilterState {
     sliderCurrent: number[]
-    setSliderCurrent: (value: number[]) => void
-    setSliderValues: (value: { minValue: number; maxValue: number }) => void
+    setSliderCurrent: (values: number[]) => void
+    dateRange: [Dayjs | null, Dayjs | null]
+    setDateRange: (range: [Dayjs | null, Dayjs | null]) => void
 }
 
-export const FilterContext = createContext<FilterContextType | null>(null)
+export const FilterContext = createContext<FilterState | null>(null)
 
-export default function FilterProvider({ children }: { children: React.ReactNode }) {
-    const [sliderValues, setSliderValues] = useState({ minValue: 0, maxValue: 100 })
-    const [sliderCurrent, setSliderCurrent] = useState([0, 100])
+export function FilterProvider({ children }: { children: React.ReactNode }) {
+    const [sliderCurrent, setSliderCurrent] = useState<number[]>([0, 1000]) // Default range
+    const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([null, null]) // New date range state
 
     return (
-        <FilterContext.Provider value={{ sliderValues, sliderCurrent, setSliderCurrent, setSliderValues }}>
+        <FilterContext.Provider value={{ sliderCurrent, setSliderCurrent, dateRange, setDateRange }}>
             {children}
         </FilterContext.Provider>
     )

@@ -16,8 +16,7 @@ export default function Filter() {
                 <Typography className="p-3" variant="h6" fontWeight={300}>
                     Filters
                 </Typography>
-                <div className="flex flex-row items-center px-3 w-full gap-4">
-                    <SelectAutoWidth />
+                <div className="flex flex-row items-center px-3 w-full gap-4 justify-evenly p-3">
                     <RangeSlider />
                     <DatePicker />
                 </div>
