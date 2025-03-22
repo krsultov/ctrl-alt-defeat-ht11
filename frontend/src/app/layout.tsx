@@ -2,6 +2,7 @@
 import { Metadata } from "next" // Import Metadata from Next.js
 import Nav from "./(components)/Nav" // Your Nav component
 import "./globals.css" // Your global styles
+import FilterContextProvider from "./(contexts)/FilterContextProvider"
 
 // No "use client" directive here, since this is a server-side component
 
@@ -15,8 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body>
-                <Nav />
-                <div className="flex-grow">{children}</div>
+                <FilterContextProvider>
+                    <Nav />
+                    <div className="flex-grow">{children}</div>
+                </FilterContextProvider>
             </body>
         </html>
     )
