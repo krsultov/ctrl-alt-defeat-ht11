@@ -28,7 +28,7 @@ export default function BasicDateTimeRangePicker() {
 
   return (
     <Box component="div" className="flex gap-5" sx={{ width: 350 }}>
-    <Typography>Time Range:</Typography>
+    <Typography>Date period:</Typography>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer sx={{p:0}}  components={['DateTimeRangePicker']}>
         <DateRangePicker onChange={(e) => handleChange(e)} localeText={{ start: 'from', end: 'to' }} />
