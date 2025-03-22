@@ -12,11 +12,10 @@ import {
     Typography,
     TablePagination
 } from "@mui/material"
-
-import Image from "next/image" // ✅ Import if using Next.js
-import loading2 from "../(assets)/loading.gif"
+import Image from "next/image"
 import { styled } from "@mui/material/styles"
 import Filter from "../(components)/Filter"
+import loading2 from "../(assets)/loading.gif"
 
 // Styled components
 const StyledTableCell = styled(TableCell)(() => ({
@@ -56,7 +55,7 @@ const generateDummyTransactions = (count: number): Transaction[] => {
         metadata: { note: "Sample transaction" },
         status: i % 3 === 0 ? "Pending" : "Completed",
         signature: `SIG-${i + 100}`,
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(Date.now() - Math.random() * 10000000000).toISOString(), // Random past date
         completedAt: i % 3 === 0 ? null : new Date().toISOString()
     }))
 }
@@ -67,21 +66,40 @@ export default function Transactions() {
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(5)
 
-    // Simulate data fetching
+    // Filter states
+    const [amountRange, setAmountRange] = useState<number[]>([0, 1000])
+    const [selectedType, setSelectedType] = useState<string | null>(null)
+    const [selectedDate, setSelectedDate] = useState<string | null>(null)
+
+    // Fetch transactions
     useEffect(() => {
         setTimeout(() => {
-            setTransactions(generateDummyTransactions(50)) // Generate 50 dummy transactions
+            setTransactions(generateDummyTransactions(50))
             setLoading(false)
-        }, 1000) // Simulate a 1-second API delay
+        }, 1000)
     }, [])
 
+    // Handle filter updates
+    const handleAmountChange = (newRange: number[]) => setAmountRange(newRange)
+    const handleTypeChange = (type: string) => setSelectedType(type)
+    const handleDateChange = (date: string) => setSelectedDate(date)
+
+    // Filter transactions
+    const filteredTransactions = transactions.filter(
+        (tx) =>
+            tx.amount >= amountRange[0] &&
+            tx.amount <= amountRange[1] &&
+            (!selectedType || tx.type === selectedType) &&
+            (!selectedDate || tx.createdAt >= selectedDate) // Date filter
+    )
+
+    // Pagination
+    const paginatedTransactions = filteredTransactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     const handleChangePage = (_event: unknown, newPage: number) => setPage(newPage)
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(parseInt(event.target.value, 10))
         setPage(0)
     }
-
-    const paginatedTransactions = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     return (
         <div className="min-w-screen pt-8 px-6">
@@ -92,13 +110,16 @@ export default function Transactions() {
             </div>
 
             <div className="my-[5%]">
-                <Filter/>
+                <Filter
+                    onPriceChange={handleAmountChange}
+                    onPeriodChange={handleTypeChange}
+                    onDateChange={handleDateChange}
+                />
             </div>
 
             {loading ? (
                 <div className="flex justify-center items-center py-10">
-                    <Image src={loading2} alt="loading..." width={50} height={50} />{" "}
-                    {/* ✅ Ensure correct width/height */}
+                    <Image src={loading2} alt="loading..." width={50} height={50} />
                 </div>
             ) : (
                 <>
@@ -142,7 +163,7 @@ export default function Transactions() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={transactions.length}
+                        count={filteredTransactions.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

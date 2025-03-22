@@ -1,54 +1,56 @@
 "use client"
 
-import { Box, Typography } from '@mui/material';
-import Slider from '@mui/material/Slider';
-import { useContext} from 'react';
-import { FilterContext } from '../(contexts)/FilterContext';
-
-function valuetext(value: number) {
-    return `${value}°C`
-}
+import { Box, Typography } from "@mui/material"
+import Slider from "@mui/material/Slider"
+import { useContext, useEffect, useState } from "react"
+import { FilterContext } from "../(contexts)/FilterContext"
 
 const minDistance = 10
 
 export default function RangeSlider() {
-  
+    const filter = useContext(FilterContext)
 
-  const filter = useContext(FilterContext)
+    // Local state to prevent shrinking effect
+    const [localValue, setLocalValue] = useState(filter!.sliderCurrent)
 
-  const handleChange = (
-    event: Event,
-    newValue: number | number[],
-    activeThumb: number,
-  ) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
+    // Sync local state with context when necessary
+    useEffect(() => {
+        setLocalValue(filter!.sliderCurrent)
+    }, [filter!.sliderCurrent])
+
+    const handleChange = (_event: Event, newValue: number | number[], activeThumb: number) => {
+        if (!Array.isArray(newValue)) return
+
+        let updatedValues = [...newValue]
 
         if (activeThumb === 0) {
-            filter!.setSliderCurrent([Math.min(newValue[0], filter!.sliderCurrent[1] - minDistance), filter!.sliderCurrent[1]])
+            updatedValues[0] = Math.min(newValue[0], localValue[1] - minDistance)
         } else {
-            filter!.setSliderCurrent([filter!.sliderCurrent[0], Math.max(newValue[1], filter!.sliderCurrent[0] + minDistance)])
+            updatedValues[1] = Math.max(newValue[1], localValue[0] + minDistance)
         }
 
-        filter?.setSliderValues({minValue: filter.sliderCurrent[0], maxValue: filter.sliderCurrent[1]})
+        setLocalValue(updatedValues) // Update only the displayed value
+
+        // Update the global slider range without modifying min/max
+        setTimeout(() => {
+            filter!.setSliderCurrent(updatedValues)
+        }, 100)
     }
 
-  return (
-    <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
-        <Typography>Ammount:</Typography>
-        <Slider
-            min={filter?.sliderValues.minValue}
-            max={filter?.sliderValues.maxValue}
-            step={5}
-            size='small'
-            marks
-            getAriaLabel={() => 'Minimum distance'}
-            value={filter!.sliderCurrent}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-            disableSwap
-        />
-    </Box>
-  )}
+    return (
+        <Box component="div" className="flex gap-5" sx={{ width: 300 }}>
+            <Typography>Amount:</Typography>
+            <Slider
+                min={filter!.sliderValues.minValue} // Static min value
+                max={filter!.sliderValues.maxValue} // Static max value
+                step={5}
+                size="small"
+                marks
+                value={localValue}
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                disableSwap
+            />
+        </Box>
+    )
+}
