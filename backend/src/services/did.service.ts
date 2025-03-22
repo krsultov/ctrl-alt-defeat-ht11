@@ -5,6 +5,7 @@ import { DIDDocument, IDidService } from "@interfaces/did.interfaces"
 import base58 from "bs58"
 import redis from "@utils/redis"
 import * as crypto from "node:crypto"
+import { boundMethod } from "autobind-decorator"
 
 export class DidService implements IDidService {
     private readonly userRepository: Repository<User>
@@ -13,6 +14,21 @@ export class DidService implements IDidService {
         this.userRepository = userRepository
     }
 
+    @boundMethod
+    async registerDid(did: string): Promise<User> {
+        const publicKey = base58.decode(did.split(":")[-1].toString()).toString()
+
+        const newUser = this.userRepository.create({
+            did,
+            status: "pending",
+            publicKey: publicKey.toString(),
+            metadata: {}
+        })
+
+        return this.userRepository.save(newUser)
+    }
+
+    @boundMethod
     async generateDID(didUrl: string): Promise<{ did: string; privateKey: string; publicKey: string }> {
         const { publicKey, privateKey } = generateKeyPairSync("rsa", {
             modulusLength: 4096,
