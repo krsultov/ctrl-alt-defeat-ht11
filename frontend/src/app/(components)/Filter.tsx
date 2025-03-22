@@ -2,7 +2,6 @@
 
 import { Typography } from "@mui/material";
 import SelectAutoWidth from "./SelectAutoWidth";
-import RangeManager from "./RangeManager";
 import DatePicker from "./DatePicker";
 import RangeSlider from "./RangeSlider";
 import { FilterContext } from "../(contexts)/FilterContext";
@@ -12,6 +11,11 @@ export default function Filter() {
     const[values, setValues] = useState({maxValue: 100, minValue: 0})
     const [amount, setAmount] = useState<"5" | "10" | "20" | "50">("5")
     const [SliderCurrent, setSliderCurrent] = useState<number[]>([0, 40]);
+    const [itemCount, setItemCount] = useState<number>(0);
+
+    const handleItemCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setItemCount(Number(event.target.value));
+    };
 
     return (
             <FilterContext.Provider value={{
